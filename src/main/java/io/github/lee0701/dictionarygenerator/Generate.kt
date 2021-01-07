@@ -10,10 +10,14 @@ fun main() {
 
 fun generateHanjaDictionary() {
     val dictionary = Dictionary()
-    val reader = {}.javaClass.getResourceAsStream("/hanja.txt").bufferedReader()
+    val hanja = {}.javaClass.getResourceAsStream("/hanja.txt").bufferedReader()
+    val freqHanja = {}.javaClass.getResourceAsStream("/freq-hanja.txt").bufferedReader().readLines()
+        .map { it.split(":") }.map { it[0] to it[1].toInt() }.toMap()
+    val freqHanjaeo = {}.javaClass.getResourceAsStream("/freq-hanjaeo.txt").bufferedReader().readLines()
+        .map { it.split(":") }.map { it[0] to it[1].toInt() }.toMap()
     val comment = mutableListOf<String>()
     while(true) {
-        val line = reader.readLine() ?: break
+        val line = hanja.readLine() ?: break
         if(line.isEmpty()) continue
         if(line[0] == '#') comment += line
         else {
@@ -21,7 +25,9 @@ fun generateHanjaDictionary() {
             val key = items[0]
             val result = items[1]
             val extra = items[2]
-            dictionary.insert(key, Dictionary.Entry(result, extra, 0))
+            val frequency = freqHanja[result] ?: freqHanjaeo[result]?.let { it % 10000 } ?: 0
+            if(frequency >= Short.MAX_VALUE) println("$result: $frequency > ${Short.MAX_VALUE}")
+            dictionary.insert(key, Dictionary.Entry(result, extra, frequency))
         }
     }
     val outputDir = File("output")
