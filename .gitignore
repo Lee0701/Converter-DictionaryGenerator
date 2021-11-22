@@ -1,7 +1,7 @@
 
 # data resource files
 src/main/resources/
-output/dict.bin
+output/*.bin
 
 # Compiled class file
 *.class
