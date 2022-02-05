@@ -7,7 +7,7 @@ fun main() {
 //    genetateTestDictionary()
     generateHanjaDictionary()
     generateAdditionalDictionary("metro-station")
-    generateAdditionalDictionary("neologism")
+    generateAdditionalDictionary("newly-coined")
 }
 
 fun generateHanjaDictionary() {
