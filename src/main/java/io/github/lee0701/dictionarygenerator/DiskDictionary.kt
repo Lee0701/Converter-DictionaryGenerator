@@ -28,7 +28,6 @@ class DiskDictionary(input: InputStream) {
         p += 2 + children*6
         val entries = data.getShort(p)
         p += 2
-        println(p.toString(16))
         return (0 until entries).map {
             val result = getChars(data, p)
             p += result.length*2 + 2

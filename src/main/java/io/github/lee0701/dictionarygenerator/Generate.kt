@@ -4,10 +4,11 @@ import java.io.DataOutputStream
 import java.io.File
 
 fun main() {
-//    genetateTestDictionary()
+    genetateTestDictionary()
     generateHanjaDictionary()
     generateAdditionalDictionary("metro-station")
-    generateAdditionalDictionary("neologism")
+    generateAdditionalDictionary("person-name")
+    generateAdditionalDictionary("newly-coined")
 }
 
 fun generateHanjaDictionary() {
